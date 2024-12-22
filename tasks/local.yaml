@@ -1,0 +1,10 @@
+version: "3"
+
+env:
+  CONFIG_PATH: "{{.ROOT_DIR}}/config/local.yaml"
+
+tasks:
+  run:
+    desc: "Запуск приложения без докера"
+    cmds:
+      - go run ./cmd/app/main.go

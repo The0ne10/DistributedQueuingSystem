@@ -1,0 +1,13 @@
+env: "local"
+
+http:
+  address: ":8080"
+  timeout: 5s
+  timeIdle: 60s
+
+storage:
+  host: postgres
+  user: "dev"
+  password: "dev"
+  database: "dev"
+  port: 5432
