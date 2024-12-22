@@ -1,10 +1,13 @@
 module DistributedQueueSystem
 
-go 1.22.2
+go 1.23
+
+toolchain go1.23.2
 
 require (
 	github.com/BurntSushi/toml v1.2.1 // indirect
 	github.com/IBM/sarama v1.43.3 // indirect
+	github.com/The0ne10/grpc-for-DQS v0.0.0-20241222202635-0b6eff3ef22e // indirect
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/eapache/go-resiliency v1.7.0 // indirect

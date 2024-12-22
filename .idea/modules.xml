@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DistributedQueueSystem.iml" filepath="$PROJECT_DIR$/.idea/DistributedQueueSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../grpc-for-DQS/.idea/grpc-for-DQS.iml" filepath="$PROJECT_DIR$/../grpc-for-DQS/.idea/grpc-for-DQS.iml" />
     </modules>
   </component>
 </project>
