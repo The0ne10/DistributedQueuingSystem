@@ -1,9 +1,12 @@
 env: "local"
 
 http:
-  address: ":8080"
+  address: ":80"
   timeout: 5s
   timeIdle: 60s
+
+grpc:
+  port: 50523
 
 storage:
   host: postgres

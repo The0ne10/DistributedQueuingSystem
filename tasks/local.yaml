@@ -1,10 +1,56 @@
-version: "3"
+version: '3'
 
 env:
+  DB_DRIVER: "postgres"
+  DB_HOST: localhost
+  DB_USER: dev
+  DB_PASSWORD: dev
+  DB_DATABASE: dev
+  DB_PORT: 5432
+  DB_SSLMODE: disable
+
   CONFIG_PATH: "{{.ROOT_DIR}}/config/local.yaml"
+  MIGRATION_DIR: "{{.ROOT_DIR}}/migrations"
+
+  GOOSE_DRIVER: "{{.DB_DRIVER}}"
+  GOOSE_DBSTRING: "user={{.DB_USER}} 
+                  dbname={{.DB_DATABASE}} 
+                  sslmode={{.DB_SSLMODE}} 
+                  host={{.DB_HOST}} 
+                  password={{.DB_PASSWORD}} 
+                  port={{.DB_PORT}}"
+  GOOSE_MIGRATION_DIR: "{{.MIGRATION_DIR}}"
 
 tasks:
   run:
-    desc: "Запуск приложения без докера"
+    desc: "Run application on local server"
+    cmd:
+      go run ./cmd/app/main.go
+
+  build:
+    desc: "Build local docker compose"
     cmds:
-      - go run ./cmd/app/main.go
+      - docker compose -f ./docker/local/docker-compose-db.yaml up --build -d
+      - docker compose -f ./docker/local/docker-compose-app.yaml up --build
+
+  up:
+    desc: "Start local docker containers"
+    cmds:
+      - docker compose -f ./docker/local/docker-compose-db.yaml up -d
+      - docker compose -f ./docker/local/docker-compose-app.yaml up
+
+  down:
+    desc: "Stop local docker containers"
+    cmds:
+      - docker compose -f ./docker/local/docker-compose-db.yaml down
+      - docker compose -f ./docker/local/docker-compose-app.yaml down
+
+  goose:create:
+    desc: "Create new migrations"
+    cmds:
+      - goose -dir "{{.GOOSE_MIGRATION_DIR}}" create "{{.name}}" sql
+
+  goose:up:
+    desc: "Up migrations"
+    cmds:
+      - goose -dir "{{.GOOSE_MIGRATION_DIR}}" up

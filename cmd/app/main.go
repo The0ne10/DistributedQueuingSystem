@@ -1,6 +1,7 @@
 package main
 
 import (
+	"DistributedQueueSystem/internal/app"
 	"DistributedQueueSystem/internal/config"
 	"log/slog"
 	"os"
@@ -23,11 +24,11 @@ func main() {
 		log.Debug("Debug starting")
 	}
 
-	// TODO: init storage
+	application := app.New(log, cfg.GRPC.Port)
 
-	// TODO: init grpcServer
+	application.GRPCSrv.MustRun()
 
-	// TODO: init application
+	log.Info("Application stopped.")
 }
 
 func setupLogger(env string) *slog.Logger {

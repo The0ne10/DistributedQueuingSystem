@@ -8,11 +8,16 @@ import (
 
 type Config struct {
 	Env string `yaml:"env" env-default:"local"`
-	HTTPServer
+	HTTP
 	Storage
+	GRPC
 }
 
-type HTTPServer struct {
+type GRPC struct {
+	Port int `yaml:"port" env-default:"52204"`
+}
+
+type HTTP struct {
 	Address  string        `yaml:"address" env-default:":8080"`
 	Timeout  time.Duration `yaml:"timeout" env-default:"5s"`
 	TimeIdle time.Duration `yaml:"time_idle" env-default:"60s"`
@@ -23,6 +28,7 @@ type Storage struct {
 	Password string `yaml:"password" env-required:"true"`
 	Host     string `yaml:"host" env-required:"true"`
 	Port     string `yaml:"port" env-required:"true"`
+	Database string `yaml:"database" env-required:"true"`
 }
 
 func MustLoad() Config {
