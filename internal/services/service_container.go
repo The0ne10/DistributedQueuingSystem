@@ -1,13 +1,13 @@
 package services
 
-import "DistributedQueueSystem/internal/services/tasks"
+import "DistributedQueueSystem/internal/services/queue"
 
 type ServiceContainer struct {
-	TaskService *tasks.TaskService
+	TaskService *queue.QueueService
 }
 
 func New() *ServiceContainer {
 	return &ServiceContainer{
-		TaskService: tasks.NewTaskService(),
+		TaskService: queue.New(),
 	}
 }

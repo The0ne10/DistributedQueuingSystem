@@ -5,6 +5,8 @@ import (
 	"DistributedQueueSystem/internal/config"
 	"log/slog"
 	"os"
+	"os/signal"
+	"syscall"
 )
 
 const (
@@ -24,11 +26,18 @@ func main() {
 		log.Debug("Debug starting")
 	}
 
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
+
 	application := app.New(log, cfg.GRPC.Port)
 
-	application.GRPCSrv.MustRun()
+	go application.GRPCSrv.MustRun()
+
+	<-sigChan
 
 	log.Info("Application stopped.")
+
+	// TODO: Сделать мониторинг сервиса
 }
 
 func setupLogger(env string) *slog.Logger {

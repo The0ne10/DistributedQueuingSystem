@@ -1,8 +1,8 @@
 package grpcapp
 
 import (
-	"DistributedQueueSystem/internal/grpc/tasks"
 	"DistributedQueueSystem/internal/services"
+	"DistributedQueueSystem/internal/transport/grpc/tasks"
 	"fmt"
 	"google.golang.org/grpc"
 	"log/slog"
@@ -17,12 +17,15 @@ type App struct {
 
 func New(
 	log *slog.Logger,
-	services *services.ServiceContainer,
 	port int,
+	services *services.ServiceContainer,
 ) *App {
 	gRPCServer := grpc.NewServer()
 
-	tasks.Register(gRPCServer, services)
+	// TODO: Разобраться/Реализовать интерсепторы(мидлевары) Для grpc
+
+	// Регистрация grpc - контрактов - что то на подобие роуторов
+	tasks.Register(log, gRPCServer, services)
 
 	return &App{
 		log:        log,
