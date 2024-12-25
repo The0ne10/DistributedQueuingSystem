@@ -1,11 +1,11 @@
-package queue
+package tasks
 
 import (
 	"context"
 	"log/slog"
 )
 
-type QueueService struct {
+type TaskService struct {
 	ctx context.Context
 	log *slog.Logger
 }
@@ -15,6 +15,6 @@ type Response struct {
 	Success bool   `json:"success"`
 }
 
-func New() *QueueService {
-	return &QueueService{}
+func New() *TaskService {
+	return &TaskService{}
 }

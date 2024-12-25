@@ -11,6 +11,11 @@ type Config struct {
 	HTTP
 	Storage
 	GRPC
+	Kafka
+}
+
+type Kafka struct {
+	Address []string `yaml:"address" env-required:"true"`
 }
 
 type GRPC struct {

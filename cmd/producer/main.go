@@ -1,7 +1,7 @@
 package main
 
 import (
-	"DistributedQueueSystem/internal/kafka"
+	"DistributedQueueSystem/internal/services/kafka"
 	"log"
 )
 

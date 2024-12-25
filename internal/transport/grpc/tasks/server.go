@@ -29,7 +29,7 @@ func (s *serverApi) PushTask(
 	ctx context.Context,
 	request *queue.PushTaskRequest,
 ) (*queue.PushTaskResponse, error) {
-	const op = "transport.queue.PushTask"
+	const op = "transport.tasks.PushTask"
 
 	log := s.log.With(slog.String("op", op))
 	log.Info("Received PushTask request", "queue_name", request.QueueName, "task_id", request.TaskId)
@@ -61,7 +61,7 @@ func (s *serverApi) PushTask(
 		Success: true,
 	}
 
-	log.Info("Task successfully added to queue", "queue_name", request.QueueName, "task_id", request.TaskId)
+	log.Info("Task successfully added to tasks", "queue_name", request.QueueName, "task_id", request.TaskId)
 
 	return response, nil
 }

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/IBM/sarama"
 	"log"
+	"log/slog"
 	"time"
 )
 
@@ -18,6 +19,7 @@ var (
 
 type AsyncProducer struct {
 	producer sarama.AsyncProducer
+	log      *slog.Logger
 }
 
 func NewProducer(address []string) (*AsyncProducer, error) {
